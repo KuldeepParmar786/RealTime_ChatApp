@@ -27,11 +27,11 @@ const Signuppage=()=>{
      return true
   }
 
-  const handleSubmit=(e)=>{
+  const handleSubmit=async(e)=>{
      e.preventDefault()
      const success=validateform()
      if(success===true){
-     signUp(form)
+     await signUp(form)
      }
   }
 
@@ -47,7 +47,7 @@ const Signuppage=()=>{
                 className="size-12 rounded-xl bg-primary/10 flex items-center justify-center 
               group-hover:bg-primary/20 transition-colors"
               >
-                <MessageSquare className="size-6 text-primary" />
+                <MessageSquare className="size-6 text-primary " />
               </div>
               <h1 className="text-2xl font-bold mt-2">Create Account</h1>
               <p className="text-base-content/60">Get started with your free account</p>
@@ -60,7 +60,7 @@ const Signuppage=()=>{
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <User className="size-5 text-base-content/40" />
+                  <User className="size-5 text-base-content/40 z-1" />
                 </div>
                 <input
                   type="text"
@@ -78,7 +78,7 @@ const Signuppage=()=>{
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="size-5 text-base-content/40" />
+                  <Mail className="size-5 text-base-content/40 z-1" />
                 </div>
                 <input
                   type="email"
@@ -96,7 +96,7 @@ const Signuppage=()=>{
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="size-5 text-base-content/40" />
+                  <Lock className="size-5 text-base-content/40 z-1" />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}

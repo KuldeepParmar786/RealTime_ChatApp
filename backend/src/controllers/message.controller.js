@@ -35,14 +35,13 @@ export const getMessages=async(req,res)=>{
 
 export const sendMessage=async(req,res)=>{
     try{
-       const{text}=req.body
-       const image=req.file
+       const{text,image}=req.body
        const{id:receiverId}=req.params
        const senderId=req.user._id
        let imageUrl
 
        if(image){
-         const uploadResponse= await cloudinary.uploader.upload(image.path)
+         const uploadResponse= await cloudinary.uploader.upload(image)
          console.log(uploadResponse)
          imageUrl=uploadResponse.secure_url
        }

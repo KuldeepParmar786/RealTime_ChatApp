@@ -6,11 +6,14 @@ import Profilepage from './Pages/ProfilePage'
 import Settingspage from './Pages/SettingsPage'
 import Signuppage from './Pages/SignupPage'
 import {useAuthStore} from './store/checkAuth.js'
+import {useThemeStore} from './store/useThemeStore.js'
 import {Loader} from 'lucide-react'
 import {Toaster} from 'react-hot-toast'
+import Navbar from './Components/Navbar.jsx'
 
 const App=()=>{
    const {authUser,checkAuth,isCheckingAuth}=useAuthStore()
+   const{theme,setTheme}=useThemeStore()
    
    useEffect(()=>{
      checkAuth()
@@ -24,7 +27,8 @@ const App=()=>{
       )
    }
    return(
-      <div>
+      <div data-theme={theme}>
+      <Navbar />
       <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
         <Route path="/signup" element={!authUser ? <Signuppage /> : <Navigate to="/" />} />
