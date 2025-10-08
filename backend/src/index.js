@@ -12,13 +12,13 @@ app.use(cors({
     credentials:true
 }))
 
-app.use(express.static('dist'))
 app.use(express.json({limit:"20mb"}))
 app.use(cookieParser())
 
 app.use('/api/auth',authRouter);
 app.use('/api/message',messageRouter)
 
+app.use(express.static('dist'))
 
 const PORT=process.env.PORT;
 const URL=process.env.MONGODB_URI;
