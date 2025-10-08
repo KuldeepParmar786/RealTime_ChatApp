@@ -1,6 +1,7 @@
 import User from '../models/user.js'
 import Message from '../models/message.js'
 import cloudinary from '../lib/cloudinary.js'
+import { getReceiverSocket,io} from '../lib/socket.js'
 
 export const userforSidebar=async(req,res)=>{
      try{
@@ -54,8 +55,12 @@ export const sendMessage=async(req,res)=>{
        })
 
        await newMessage.save()
+       
+       const receiversocketId=getReceiverSocket(receiverId)
+       io.to(receiversocketId).emit('newMessage',newMessage)
 
-      res.status(201).json(newMessage)
+       res.status(201).json(newMessage)
+
     }
     catch(error){
         console.log('Error in sendMessage controller',error.message)

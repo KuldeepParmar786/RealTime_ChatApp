@@ -1,6 +1,7 @@
 import {create} from 'zustand'
 import {axiosInstance} from '../lib/axios'
 import {toast} from 'react-hot-toast'
+import {useAuthStore} from './checkAuth'
 
 export const useChatStore=create((set,get)=>({
     isLoadingusers:true,
@@ -53,6 +54,25 @@ export const useChatStore=create((set,get)=>({
 
     setSelectedUser:(SelectedUser)=>{
        set({SelectedUser})
+    },
+    
+    subscribeToMessages:()=>{
+       const{SelectedUser}=get()
+       if(!SelectedUser) return 
+       
+       const socket=useAuthStore.getState().socket
+
+       socket.on('newMessage',(newMessage)=>{
+           const isMessageSentFromSelectedUser = newMessage.senderId === SelectedUser._id;
+           if (!isMessageSentFromSelectedUser) return;
+           set({messages:[...get().messages,newMessage]})
+       })
+    },
+
+    unsubscribeFromMessages:()=>{
+        const socket=useAuthStore.getState().socket
+        
+        socket.off('newMessage')
     }
 
 }))

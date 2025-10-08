@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {useAuthStore} from '../store/checkAuth'
+import {useNavigate} from 'react-router-dom'
 import { MessageSquare,User,Mail,Eye,Lock,EyeOff,Loader2} from 'lucide-react'
 import {Link} from 'react-router-dom'
 import toast  from 'react-hot-toast'
@@ -16,6 +17,8 @@ const Signuppage=()=>{
 
   const{signUp,isSigningUp}=useAuthStore()
 
+  const navigate=useNavigate
+
   const validateform=()=>{
      const emailRegex=/^[^\s@]+@[^\s@]+\.[^\s@]+$/
      if(!form.fullName.trim())return toast.error('fullname is required')
@@ -30,9 +33,7 @@ const Signuppage=()=>{
   const handleSubmit=async(e)=>{
      e.preventDefault()
      const success=validateform()
-     if(success===true){
-     await signUp(form)
-     }
+     if(success===true) signUp(form)
   }
 
     return (

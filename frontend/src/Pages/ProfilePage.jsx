@@ -3,6 +3,7 @@ import {Camera,User,Mail} from 'lucide-react'
 const Profilepage=()=>{
   const{authUser,isUpdatingprofile,updateProfile}=useAuthStore()
 
+
    const handleImageUpload=async(e)=>{
       const file=e.target.files[0]
 
