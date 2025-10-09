@@ -11,7 +11,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 app.use(cors({
-    origin:'https://realtime-chatapp-kyax.onrender.com/',
+    origin:'https://realtime-chatapp-kyax.onrender.com',
     credentials:true
 }))
 
@@ -21,14 +21,15 @@ app.use(cookieParser())
 app.use('/api/auth',authRouter);
 app.use('/api/message',messageRouter)
 
-app.use(express.static('dist'))
 
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+app.use(express.static(path.resolve(__dirname,'../dist')))
+
 app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.resolve(__dirname, '../dist', 'index.html'));
 });
 
 const PORT=process.env.PORT;
