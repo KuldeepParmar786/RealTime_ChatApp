@@ -7,6 +7,8 @@ import {dbConnect} from './lib/db.js';
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import{app,server} from './lib/socket.js'
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 app.use(cors({
     origin:'https://realtime-chatapp-kyax.onrender.com/',
@@ -20,6 +22,14 @@ app.use('/api/auth',authRouter);
 app.use('/api/message',messageRouter)
 
 app.use(express.static('dist'))
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'dist', 'index.html'));
+});
 
 const PORT=process.env.PORT;
 const URL=process.env.MONGODB_URI;
