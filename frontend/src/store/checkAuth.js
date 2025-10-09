@@ -3,7 +3,7 @@ import {axiosInstance} from '../lib/axios'
 import toast from 'react-hot-toast'
 import {io} from 'socket.io-client'
 
-const BaseURL='http://localhost:4000'
+const BaseURL='https://realtime-chatapp-kyax.onrender.com/'
 export const useAuthStore=create((set,get)=>({
  authUser:null,
  isCheckingAuth:true,

@@ -9,6 +9,7 @@ import cors from 'cors'
 import{app,server} from './lib/socket.js'
 
 app.use(cors({
+    origin:'https://realtime-chatapp-kyax.onrender.com/',
     credentials:true
 }))
 
